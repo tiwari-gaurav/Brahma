@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "358203124002",
+    "firebase_url": "https://brahma360-207705.firebaseio.com",
+    "project_id": "brahma360-207705",
+    "storage_bucket": "brahma360-207705.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358203124002:android:89082ae4962c88a6",
+        "android_client_info": {
+          "package_name": "com.brahma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358203124002-0tu0jrigmr0bl2hlnis2d95gdj9om7qa.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "358203124002-0tu0jrigmr0bl2hlnis2d95gdj9om7qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA15verkV4HZIj99Sy6BkgZIWVYmvHgoq8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
