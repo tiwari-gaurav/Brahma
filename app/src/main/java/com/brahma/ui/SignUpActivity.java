@@ -1,6 +1,9 @@
 package com.brahma.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +17,9 @@ import com.brahma.R;
 import com.brahma.Room.RoomDatabase;
 import com.brahma.Room.User;
 import com.brahma.utils.Utils;
+import com.brahma.viewModel.Injection;
+import com.brahma.viewModel.UserViewModel;
+import com.brahma.viewModel.ViewModelfactory;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -33,10 +39,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.internal.LifecycleActivity;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SignUpActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = SignUpActivity.class.getSimpleName();
@@ -49,6 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     private String fbName, fbProfileImg, fbLocation, fbEmail;
     boolean isLoggedIn;
     RoomDatabase roomDatabase;
+    private UserViewModel mUserViewModel;
+    private ViewModelfactory mViewModelFactory;
 
 
     @Override
@@ -58,7 +69,8 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_sign_up);
         AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id));
         initViews();
-        roomDatabase = RoomDatabase.getdatabase(getApplicationContext());
+        mViewModelFactory = Injection.provideViewModelFactory(this.getApplication());
+        mUserViewModel = ViewModelProviders.of(this,mViewModelFactory).get(UserViewModel.class);
 
         callbackManager = CallbackManager.Factory.create();
         mGoogleSignUp.setOnClickListener(this);
@@ -162,24 +174,17 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
             fbName = acct.getDisplayName();
             // String personPhotoUrl = acct.getPhotoUrl().toString();
-           fbEmail = acct.getEmail();
-            Intent intent = new Intent(this,MainActivity.class);
-            intent.putExtra("name",fbName);
-            intent.putExtra("email",fbEmail);
-            intent.putExtra("picUrl",acct.getPhotoUrl());
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    User user = new User();
-                    user.setEmail(fbEmail);
-                    user.setUserName(fbName);
-                    roomDatabase.userDao().insert(new User(fbName,fbEmail));
-                }
-            }).start();
+            fbEmail = acct.getEmail();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("name", fbName);
+            intent.putExtra("email", fbEmail);
+            intent.putExtra("picUrl", acct.getPhotoUrl());
 
+            User user = new User(fbName, fbEmail);
+            mUserViewModel.insert(user);
             startActivity(intent);
 
-            Log.e(TAG, "Name: " + fbName     + ", email: " + fbEmail + "url" + acct.getPhotoUrl());
+            Log.e(TAG, "Name: " + fbName + ", email: " + fbEmail + "url" + acct.getPhotoUrl());
 
         }
     }

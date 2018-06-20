@@ -1,9 +1,13 @@
 package com.brahma.ui;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,9 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brahma.R;
+import com.brahma.Room.User;
+import com.brahma.viewModel.Injection;
+import com.brahma.viewModel.UserViewModel;
+import com.brahma.viewModel.ViewModelfactory;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,GoogleApiClient.OnConnectionFailedListener {
@@ -27,6 +37,8 @@ public class MainActivity extends AppCompatActivity
 
     private ImageView mUserImage;
     private TextView mUserName,mUserEmail;
+    private UserViewModel mUserViewModel;
+    private ViewModelfactory mViewModelFactory;
 
 
     @Override
@@ -35,6 +47,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // initialize viewModel
+        mViewModelFactory = Injection.provideViewModelFactory(this.getApplication());
+        mUserViewModel = ViewModelProviders.of(this,mViewModelFactory).get(UserViewModel.class);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,10 +72,15 @@ public class MainActivity extends AppCompatActivity
         mUserImage = (ImageView)headerView.findViewById(R.id.userImage);
         mUserName =(TextView)headerView.findViewById(R.id.user_name);
         mUserEmail = (TextView)headerView.findViewById(R.id.place);
-        if(getIntent().getStringExtra("name")!=null && getIntent().getStringExtra("email")!=null){
-            mUserName.setText(getIntent().getStringExtra("name"));
-            mUserEmail.setText(getIntent().getStringExtra("email"));
-        }
+       mUserViewModel.getUserInfo().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable List<User> users) {
+                Log.e("userInfo",users.get(0).getEmail());
+                mUserName.setText(users.get(0).getUserName());
+                mUserEmail.setText(users.get(0).getEmail());
+            }
+        });
+
             if(getIntent().getStringExtra("picUrl")!=null)
             Glide.with(this).load(getIntent().getStringExtra("picUrl")).centerCrop().into(mUserImage);
 
