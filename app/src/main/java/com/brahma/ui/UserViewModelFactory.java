@@ -1,15 +1,16 @@
-package com.brahma.viewModel;
+package com.brahma.ui;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.brahma.repository.UserRepository;
+import com.brahma.repository.BrahmaRepository;
+import com.brahma.viewModel.UserViewModel;
 
-public class ViewModelfactory extends ViewModelProvider.NewInstanceFactory{
-    private final UserRepository mRepository;
+public class UserViewModelFactory extends ViewModelProvider.NewInstanceFactory{
+    private final BrahmaRepository mRepository;
 
-    public ViewModelfactory(UserRepository repository){
+    public UserViewModelFactory(BrahmaRepository repository){
         this.mRepository = repository;
     }
 

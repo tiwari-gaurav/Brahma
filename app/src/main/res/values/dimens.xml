@@ -13,4 +13,5 @@
     <dimen name="value_45dp">45dp</dimen>
     <dimen name="value_5dp">5dp</dimen>
     <dimen name="value_30dp">30dp</dimen>
+    <dimen name="banner_margin">10dp</dimen>
 </resources>

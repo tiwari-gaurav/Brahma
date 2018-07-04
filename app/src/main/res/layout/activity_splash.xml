@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
-        android:text="See Brahma in 360"
+        android:text="See India in 360"
         android:textColor="#000"
         android:textSize="24sp"
         android:textStyle="bold" />

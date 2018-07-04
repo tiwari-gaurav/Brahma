@@ -8,4 +8,129 @@
     <color name="white">#FFFFFFFF</color>
     <color name="login_background_black">#2c2c2c</color>
     <color name="progress_orange">#fe7e00</color>
+
+    <color name="colorBlack">#555555</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#707070</color>
+    <color name="colorGreyLight">#8A8A8A</color>
+
+    <color name="google_color">#dd3d2a</color>
+    <color name="new_text_deselect">#778291</color>
+    <!--imagepicker-->
+    <color name="placeholder">#666666</color>
+    <color name="background">#3d4049</color>
+    <color name="black">#000</color>
+    <color name="light_black">#191919</color>
+    <color name="light_grey">#F2F0EF</color>
+    <color name="textColorPrimary">@color/white</color>
+    <color name="textColorPrimaryInverse">#505862</color>
+    <color name="textColorSecondary">#4a4a4a</color>
+    <color name="edittext_underline">#DCDBDC</color>
+    <color name="transparent">#00FF0000</color>
+    <color name="textColorHeadLine">#2C3035</color>
+    <color name="blog_background">#e1e1e1</color>
+    <color name="light_gray">#332c2f35</color>
+    <color name="new_background">#eaeef2</color>
+    <color name="green">#43cb83</color>
+    <color name="gray">#666565</color>
+    <color name="new_pink">#fa6d85</color>
+    <color name="blue_green">#0db4b4</color>
+    <color name="popup_color">#2d2e30</color>
+    <color name="grey">#909090</color>
+
+    <color name="dark_green">#006650</color>
+
+    <color name="fb_color">#334d9d</color>
+    <color name="yellow">#ffff00</color>
+    <color name="red">#e43310</color>
+    <color name="orange">#ff7623</color>
+    <color name="offwhite">#ebebeb</color>
+
+    <color name="segment_bar_blue">#4990e2</color>
+    <color name="segment_bar_green">#58dd7c</color>
+    <color name="segment_bar_red">#ff596e</color>
+    <color name="segment_bar_yellow">#ffc000</color>
+
+    <color name="orange_red">#f04a23</color>
+    <color name="grey_shadow">#0D4d4d4d</color>
+    <color name="transparent_white">#A6FFFFFF</color>
+    <color name="progress_dash_color">#D5D5D5</color>
+    <color name="move_status_divider">#66d7d7d7</color>
+
+    <color name="light_lite_blue">#00aeef</color>
+
+    <color name="ic_locked_bg">#d3d3d3</color>
+    <color name="gps_text_normal">#8f9caf</color>
+    <color name="gps_text_error">#ff7182</color>
+    <color name="gps_turn_on_text_color">#58dd7c</color>
+    <color name="tab_selected">#FFFF553B</color>
+    <color name="move_screen_light_grey">#9197a3</color>
+
+    <color name="leaderboard_heading">#9a9a9a</color>
+    <color name="progress_gray">#FFD8D8D8</color>
+    <color name="follow_text">#616161</color>
+    <color name="colorGray">#d8d8d8</color>
+    <color name="tabBackgroungColor">#ffffff</color>
+
+    <!-- Content-->
+    <color name="content_gear">#6180C7</color>
+    <color name="content_health">#149ADF</color>
+    <color name="content_nutrition">#FAA71B</color>
+    <color name="content_training">#F45A28</color>
+    <color name="content_yoga">#FC6276</color>
+    <color name="content_personality">#FFCC00</color>
+    <color name="content_other">#14DF8D</color>
+
+
+    <!--Challenges-->
+    <color name="leaderboard_gray">#fafafa</color>
+    <color name="statusbar_dark_green">#0b9e9e</color>
+    <color name="background_challenge_sandol">#def8e5</color>
+    <color name="line_challenge">#adadad</color>
+    <string name="leaderboard">LEADERBOARD</string>
+    <string name="view_details">View Details</string>
+    <string name="start_run">START RUN</string>
+    <color name="grey_background">#f3f3f3</color>
+    <color name="top_blue">#2e3d51</color>
+    <color name="light_grey_color">#e9e9e9</color>
+
+
+    <color name="map_screen_squircle_bg">#99FFFFFF</color>
+
+    <color name="about_us_link_text_color">#4a90e2</color>
+
+    <color name="more_screen_divider_color">#1F000000</color>
+    <color name="rating_screen_bg">#f7f9fa</color>
+
+    <color name="feedback_border">#d0d0d0</color>
+
+    <color name="edit_profile_screen_background">#f7f9fa</color>
+    <color name="level_details_sub_text_color">#778291</color>
+    <color name="level_details_sub_back_ground">#e7ebf0</color>
+    <color name="level_details_session_name_color">#7c8695</color>
+
+    <color name="challenge_detail_grey_text">#4b4b4b</color>
+    <color name="pale_grey_text">#b2c0d3</color>
+    <color name="pale_grey_two">#e7ebf0</color>
+
+    <color name="no_network_desc_color">#5a626b</color>
+    <color name="no_network_warning_bg">#ff7385</color>
+
+    <color name="profile_pager_indicator_unselected">#e6e6e6</color>
+    <color name="profile_graph_km">#fe6679</color>
+
+    <!-- -->
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+    <color name="slide_menu_color">#BF363f62</color>
 </resources>

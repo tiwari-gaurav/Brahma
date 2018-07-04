@@ -3,10 +3,11 @@ package com.brahma.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,26 +20,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.brahma.R;
 import com.brahma.Room.User;
-import com.brahma.viewModel.Injection;
+import com.brahma.Room.VideoEntity;
+import com.brahma.utils.InjectorUtils;
 import com.brahma.viewModel.UserViewModel;
-import com.brahma.viewModel.ViewModelfactory;
+import com.brahma.viewModel.VideoViewModel;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,GoogleApiClient.OnConnectionFailedListener {
-    private GoogleApiClient mGoogleApiClient;
+        implements NavigationView.OnNavigationItemSelectedListener {
+
 
     private ImageView mUserImage;
     private TextView mUserName,mUserEmail;
     private UserViewModel mUserViewModel;
-    private ViewModelfactory mViewModelFactory;
+    private VideoViewModel mVideoViewModel;
+    private UserViewModelFactory mViewModelFactory;
+    private MainViewModelFactory mMainViewModelFactory;
+    private RecyclerView mVideosRecyclerView;
+    private VideoAdapter mVideoAdapter;
 
 
     @Override
@@ -46,10 +51,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mVideosRecyclerView = (RecyclerView)findViewById(R.id.videos_recycle);
         setSupportActionBar(toolbar);
         // initialize viewModel
-        mViewModelFactory = Injection.provideViewModelFactory(this.getApplication());
+        mViewModelFactory = InjectorUtils.provideUserDetailViewModelFactory(this.getApplication());
         mUserViewModel = ViewModelProviders.of(this,mViewModelFactory).get(UserViewModel.class);
+
+        getVideoData();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +92,25 @@ public class MainActivity extends AppCompatActivity
             if(getIntent().getStringExtra("picUrl")!=null)
             Glide.with(this).load(getIntent().getStringExtra("picUrl")).centerCrop().into(mUserImage);
 
+    }
+
+    private void getVideoData() {
+        mVideoAdapter = new VideoAdapter( R.layout.news_list_item, this);
+        mVideosRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mVideosRecyclerView.setAdapter(mVideoAdapter );
+        MainViewModelFactory factory = InjectorUtils.provideMainActivityViewModelFactory(this.getApplicationContext());
+        mVideoViewModel = ViewModelProviders.of(this, factory).get(VideoViewModel.class);
+        mVideoViewModel.getmVideo().observe(this, new Observer<List<VideoEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<VideoEntity> videoEntities) {
+
+
+                if(videoEntities!=null) {
+                    mVideoAdapter.swapVideos(videoEntities);
+                    Toast.makeText(MainActivity.this, videoEntities.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -143,8 +170,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
 }

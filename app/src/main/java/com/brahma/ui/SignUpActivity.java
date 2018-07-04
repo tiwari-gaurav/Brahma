@@ -1,8 +1,5 @@
 package com.brahma.ui;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +14,8 @@ import com.brahma.R;
 import com.brahma.Room.RoomDatabase;
 import com.brahma.Room.User;
 import com.brahma.utils.Utils;
-import com.brahma.viewModel.Injection;
+import com.brahma.utils.InjectorUtils;
 import com.brahma.viewModel.UserViewModel;
-import com.brahma.viewModel.ViewModelfactory;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -39,13 +35,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.common.api.internal.LifecycleActivity;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SignUpActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = SignUpActivity.class.getSimpleName();
@@ -59,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     boolean isLoggedIn;
     RoomDatabase roomDatabase;
     private UserViewModel mUserViewModel;
-    private ViewModelfactory mViewModelFactory;
+    private UserViewModelFactory mViewModelFactory;
 
 
     @Override
@@ -69,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_sign_up);
         AppEventsLogger.activateApp(this, getString(R.string.facebook_app_id));
         initViews();
-        mViewModelFactory = Injection.provideViewModelFactory(this.getApplication());
+        mViewModelFactory = InjectorUtils.provideUserDetailViewModelFactory(this.getApplication());
         mUserViewModel = ViewModelProviders.of(this,mViewModelFactory).get(UserViewModel.class);
 
         callbackManager = CallbackManager.Factory.create();

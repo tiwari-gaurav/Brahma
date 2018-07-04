@@ -1,24 +1,21 @@
 package com.brahma.viewModel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
+
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.support.annotation.NonNull;
-
 import com.brahma.Room.User;
-import com.brahma.repository.UserRepository;
+import com.brahma.repository.BrahmaRepository;
 
 import java.util.List;
 
 public class UserViewModel extends ViewModel{
 
-    private UserRepository mUserRepository;
+    private BrahmaRepository mUserRepository;
     private LiveData<List<User>> mUserInfo;
 
 
 
-    public UserViewModel(UserRepository repository) {
+    public UserViewModel(BrahmaRepository repository) {
         super();
         mUserRepository = repository;
         mUserInfo = mUserRepository.getmUserInfo();

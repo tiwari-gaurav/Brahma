@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //Add a character every 150ms
         mAppText.setCharacterDelay(150);
-        mAppText.animateText("See Brahma in 360");
+        mAppText.animateText("See India in 360");
 
         new Handler().postDelayed(new Runnable() {
 
